@@ -1,0 +1,163 @@
+import socket
+import threading
+import time
+import uuid
+
+def make_msg_id():
+    return f"{int(time.time()*1000)}-{uuid.uuid4().hex[:6]}"
+
+def send_line(sock, line: str):
+    try: sock.sendall((line + "\n").encode("utf-8"))
+    except: pass
+
+# הגדרות שרת
+HOST = '0.0.0.0'
+PORT = 8081
+online_users = {}
+online_users_lock = threading.Lock()
+
+
+def tell_everyone_who_is_online():
+    # שולח רשימת משתמשים מופרדת בפסיקים
+    with online_users_lock:
+        current_users = [n for n in online_users.keys() if not str(n).startswith("__")]
+        sockets = list(online_users.values())
+
+    all_names = ",".join(current_users)
+    system_message = f"USERS|System|ALL|{all_names}"  # פורמט: TYPE|SENDER|TARGET|CONTENT
+
+    for user_socket in sockets:
+        send_line(user_socket, system_message)
+
+
+def broadcast(line: str):
+    with online_users_lock:
+        sockets = list(online_users.values())
+    for s in sockets:
+        send_line(s, line)
+
+
+def handle_single_client(client_socket, address):
+    nickname = None
+    try:
+        # --- Stage 1: receiving the first name and connecting ---
+        nickname = client_socket.recv(1024).decode('utf-8')
+        nickname = nickname.strip()
+        if not nickname: return
+        with online_users_lock:
+            if nickname in online_users:
+                send_line(client_socket, f"ERR|System|{nickname}|NAME_TAKEN")
+                client_socket.close()
+                return
+            online_users[nickname] = client_socket
+        print(f"--> NEW FRIEND: {nickname} joined from {address}")
+
+        # Updating list of users
+        tell_everyone_who_is_online()
+
+        # --- "Join Message": happens only once in the beginning ---
+        broadcast(f"MSG|System|ALL|{make_msg_id()}|{nickname} -> has joined the chat")
+
+        # --- Stage 2: the main loop that listens to all the messages ---
+        while True:
+            incoming_data = client_socket.recv(1024).decode('utf-8')
+            if not incoming_data: break
+
+            # Checking if it's a "Name Change" command
+            if incoming_data.startswith("CMD:NAME_CHANGE:"):
+                _, _, new_name_req = incoming_data.split(":", 2)
+
+                # Updating the dictionary: the old for the new
+                old_name = nickname
+                new_name = new_name_req.strip()  # Updating the local variable in the server
+
+                with online_users_lock:
+                    if (not new_name) or (new_name in online_users):
+                        send_line(client_socket, f"ERR|System|{old_name}|NAME_TAKEN")
+                        continue
+                    if old_name in online_users:
+                        del online_users[old_name]
+                    nickname = new_name
+                    online_users[nickname] = client_socket  # Reenlisting
+
+                send_line(client_socket, f"ACK|System|{old_name}|NAME_CHANGED|{nickname}")
+
+                print(f"--> {old_name} has changed the user_name to-> {nickname}")
+
+                # Sending updates to everyone
+                tell_everyone_who_is_online()  # Updating the list of users
+
+                broadcast(f"RENAME|{old_name}|{nickname}")
+
+                # Message to everybody about the change
+                broadcast(f"MSG|System|ALL|{make_msg_id()}|{old_name} has changed the user_name to-> {nickname}")
+
+                continue  # Skipping the rest of the loop because it's a command and not a normal text
+
+            # --- Handling normal messages (TARGET:MESSAGE) ---
+            if ":" in incoming_data:
+                target_raw, rest = incoming_data.split(":", 1)
+                target_raw = target_raw.strip()
+                if ":" not in rest:
+                    continue
+                msg_id, message_text = rest.split(":", 1)
+
+                target_is_all = (target_raw.upper() == "ALL")
+                target = "ALL" if target_is_all else target_raw
+
+                if target_is_all:
+                    formatted_msg = f"MSG|{nickname}|ALL|{msg_id}|{message_text}"
+                    with online_users_lock:
+                        sockets = list(online_users.values())
+                    for user_socket in sockets:
+                        send_line(user_socket, formatted_msg)
+                else:
+                    # Lookup exact username (no .upper())
+                    with online_users_lock:
+                        target_socket = online_users.get(target)
+                    if target_socket:   # Sending to target
+                        formatted_msg = f"MSG|{nickname}|{target}|{msg_id}|{message_text}"
+                        send_line(target_socket, formatted_msg)
+                        if target != nickname:  # Preventing duplication in client
+                            send_line(client_socket, formatted_msg)
+
+    except (ConnectionResetError, BrokenPipeError):
+        pass
+    except Exception as e:
+        print(f"Error handling client {nickname}: {e}")
+    finally:    # Handling exit
+        sockets = []
+        should_announce = False
+
+        with online_users_lock:
+            if nickname and nickname in online_users:
+                del online_users[nickname]
+                should_announce = True
+                sockets = list(online_users.values())
+
+        # Exiting message
+        if should_announce:
+            tell_everyone_who_is_online()
+            broadcast(f"MSG|System|ALL|{make_msg_id()}|{nickname} -> has disconnected")
+
+        client_socket.close()
+        print(f"Connection closed for {nickname}")
+
+
+def wake_up_server():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        server.bind((HOST, PORT))
+        server.listen(5)
+        print(f"Server is listening on port {PORT}...")
+
+        while True:
+            client, addr = server.accept()
+            threading.Thread(target=handle_single_client, args=(client, addr)).start()
+    except Exception as e:
+        print(f"CRITICAL SERVER ERROR: {e}")
+
+
+if __name__ == "__main__":
+    wake_up_server()
