@@ -56,7 +56,9 @@ There are 2 ways to open the server
 
 ### Adding a user
 This luncher is what you should see after running run_app
-<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/838ae443-56ed-4c18-802f-b3d895017376" />
+<div align="right">
+  <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/838ae443-56ed-4c18-802f-b3d895017376" />
+</div>
 
 
 To be contiued 
