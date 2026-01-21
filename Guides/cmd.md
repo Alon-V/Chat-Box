@@ -9,5 +9,25 @@ Then write there `CMD` and enter
 </div>
 write `ipconfig` and look for the ip
 
+---
 
+## Network Address Verification (macOS) 🍎
 
+On macOS, the active IP address can be identified using one of the following methods:
+
+### System Settings
+The local IP address can be viewed through the operating system settings by navigating to:
+**System Settings → Network → Active Network Interface (Wi-Fi or Ethernet)**.  
+The assigned IP address is displayed under the connection details.
+
+### Terminal Commands
+Alternatively, the IP address can be obtained using the command line:
+
+- For Wi-Fi connections:
+ipconfig getifaddr en0
+
+- For Ethernet connections:
+ipconfig getifaddr en1
+
+- To display all network interfaces:
+ifconfig
