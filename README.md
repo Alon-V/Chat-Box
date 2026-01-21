@@ -23,6 +23,11 @@ Botchat is a full Client Server architecture using pure Python socket libraries 
 | State_Globals.py | Shared state variables (Message history, Active users) |
 If you want to know a bit more about the code itself
 
+| Header 1 | Header 2 | Header 3 |
+| --- | --- | --- |
+| Cell A1 | Cell B1 | Cell C1 |
+| Cell A2 | Cell B2 | Cell C2 |
+
 ## How to Run 🏃
 You need
 - Python 3.8+
