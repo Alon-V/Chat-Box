@@ -10,14 +10,15 @@ Botchat is a full Client Server architecture using pure Python socket libraries 
 - Dynamic UI: Modern interface (NiceGUI was very time saving and helpfull) with auto-scrolling, message bubbles, and notifications.
 - Launcher: Fuctions as a control center and an observer.
 
+
 ## Project Structure 🧌
-|--Main_Server.py      # The TCP Server logic (Connection handling, Broadcasting)
-|--Chat_UI.py          # The Chat Window interface (NiceGUI + Client Socket)
-|--Launcher_UI.py      # The Dashboard/Login screen (Server toggle, User list)
-|--Common_Setups.py    # Configuration file (IP, PORT, Constants)
-|--Run_App.py          # Main entry point to start the application
-|--UI_Router.py        # Routes traffic between Launcher and Chat modes
-|--State_Globals.py    # Shared state variables (Message history, Active users)
+|--Main_Server.py  | The TCP Server logic (Connection handling, Broadcasting)
+|--Chat_UI.py  |  The Chat Window interface (NiceGUI + Client Socket)
+|--Launcher_UI.py  |  The Dashboard/Login screen (Server toggle, User list)
+|--Common_Setups.py  |  Configuration file (IP, PORT, Constants)
+|--Run_App.py    |   Main entry point to start the application
+|--UI_Router.py   |    Routes traffic between Launcher and Chat modes
+|--State_Globals.py  |   Shared state variables (Message history, Active users)
 If you want to know a bit more about the code itself
 
 ## How to Run 🏃
