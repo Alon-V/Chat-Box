@@ -192,7 +192,7 @@ Packet identification is performed using the following capture filter: "tcp.port
 <p align="left">
   <img src="images/wireshark_capture_overview3.png" width="600">
 </p>
-<p align="center">
+<p align="left">
   <img src="images/wireshark_capture_overview4.png" width="600">
 </p>
 
