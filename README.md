@@ -24,11 +24,6 @@ Botchat is a full Client Server architecture using pure Python socket libraries 
 
 If you want to know a bit more about the code itself
 
-| File | Header 2 | Header 3 |
-| --- | --- | --- |
-| Main_Server.py | The TCP Server logic (Connection handling, Broadcasting) | Cell C1 |
-| Cell A2 | Cell B2 | Cell C2 |
-
 ## How to Run 🏃
 You need
 - Python 3.8+
@@ -54,6 +49,15 @@ cd python-lan-chat`
 
 ## How to Use the app
 ###Running the chat and server
+There are 2 ways to open the server
+- run the server file
+- in the app luncher that opens after running the run_app file there is a button in the upper right corner
+  *This button might not work if you try to use the chat in a lan network in that case run the server file before run_app.
+
+### Adding a user
+This luncher is what you should see after running run_app
+<img width="432" height="583" alt="image" src="https://github.com/user-attachments/assets/838ae443-56ed-4c18-802f-b3d895017376" />
+
 
 To be contiued 
 
