@@ -48,7 +48,7 @@ cd python-lan-chat`
 `python Run_App.py`
 
 ## How to Use the app
-###Running the chat and server
+### Running the chat and server
 There are 2 ways to open the server
 - run the server file
 - in the app luncher that opens after running the run_app file there is a button in the upper right corner
@@ -68,5 +68,10 @@ using the Luncher you can see who is coneccted and close the chat for everyone
 <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/0568f2e2-f45f-4ef2-b044-76658ed0cf65" />
 </div>
 
-To be contiued 
+## How to run chatbot on local LAN (Multiple Computers) 🌐
 
+1. Find your IPv4 Address (Run ipconfig in CMD).
+2. Open Common_Setups.py.
+3. Update the SERVER_IP variable:
+`SERVER_IP = '*.*.*.*'  # Replace with YOUR local IP`
+4. Ensure your Windows Firewall allows inbound traffic on the port defined in SERVER_PORT if it does not work just disable the firewall
