@@ -88,12 +88,12 @@ BotChat consists of three layers:
 - **Launcher UI:** [`BotChat/Launcher_UI.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/Launcher_UI.py)
 - **Chat UI:** [`BotChat/Chat_UI.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/Chat_UI.py)
 - Routing controlled by:
-  - **File:** [`BotChat/UI_Router.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/UI_Router.py)
+  - **UI Router:** [`BotChat/UI_Router.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/UI_Router.py)
   - `/` → launcher  
   - `/?mode=chat&nickname=<name>` → chat window
 
 ### 🖥️ TCP Server Layer (Sockets)
-- **File:** [`BotChat/Main_Server.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/Main_Server.py)
+- **The Server:** [`BotChat/Main_Server.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/Main_Server.py)
 - Listens on: `HOST=0.0.0.0`, `PORT=<SERVER_PORT>`
 - Accepts multiple clients.
 - Each client handled in a dedicated thread.
@@ -105,14 +105,20 @@ BotChat consists of three layers:
   - avatar broadcasts
  
 ### 🗂️ Shared State (In-Process)
-The UI (launcher + chat windows in the same NiceGUI process) share Python globals:
-- **File:** [`BotChat/State_Globals.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/State_Globals.py)
-- Stores:
-  - `messages`: chat history entries
-  - `active_users_list`: server-synced online names
-  - `avatar_urls`: synced avatar URL map
-  - `avatar_seeds`: stable avatar identity across renames
-  - `user_colors_cache`: stable bg color per avatar seed
+- Configuration & Global Variables:
+  - **Setups:** [`BotChat/Common_Setups.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/Common_Setups.py)
+  - Keeps:
+    - `SERVER_IP`: depends on the needs
+    - `Ports`: server and UI
+    - `Chrome path`:  app mode
+- The UI (launcher + chat windows in the same NiceGUI process) share Python globals:
+  - **Global States for UI:** [`BotChat/State_Globals.py`](https://github.com/Alon-V/Bot-Chat/blob/main/BotChat/State_Globals.py)
+  - Stores:
+    - `messages`: chat history entries
+    - `active_users_list`: server-synced online names
+    - `avatar_urls`: synced avatar URL map
+    - `avatar_seeds`: stable avatar identity across renames
+    - `user_colors_cache`: stable bg color per avatar seed
 
 ---
 
