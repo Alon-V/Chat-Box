@@ -109,6 +109,11 @@ This luncher is what you should see after running `Run_App`:
 <img width="300" height="400" alt="image" src="https://github.com/user-attachments/assets/0568f2e2-f45f-4ef2-b044-76658ed0cf65" />
 </div>
 
+*For further explanations you can see ->
+
+- [How to Use the Launcher](https://github.com/Alon-V/Bot-Chat/blob/main/Guides/Full_Code_Description.md#how-to-use-the-launcher-)
+- [How to Use the Chat Window](https://github.com/Alon-V/Bot-Chat/blob/main/Guides/Full_Code_Description.md#how-to-use-the-chat-window-)
+
 ---
 
 ## How to run chatbot on local LAN (Multiple Computers) 🌐
