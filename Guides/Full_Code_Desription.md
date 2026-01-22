@@ -17,8 +17,8 @@ The project includes a **Launcher (Control Center)** window that can:
 
 ## Table of Contents 📌
 - [Features](#features-)
-  - [Launcher (Control Center)](#Launcher-(Control-Center))
-  - [Chat Window](#Chat-Window)
+  - [Launcher (Control Center)](#launcher-(control-center)-)
+  - [Chat Window](#chat-window-)
 - [Architecture Overview](#architecture-overview-)
 - [Project Structure](#project-structure-)
 - [Requirements](#requirements-)
