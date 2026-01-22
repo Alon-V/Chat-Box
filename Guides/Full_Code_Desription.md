@@ -24,7 +24,7 @@ The project includes a **Launcher (Control Center)** window that can:
 - [Requirements](#requirements-)
 - [Configuration (IP / Ports)](#configuration-ip--ports-)
 - [Installation](#installation-)
-- [How to Run](#how-to-run-)
+- [How To Run](#how-to-run-)
   - [Run via Launcher (Recommended)](#1-run-via-launcher-recommended-)
   - [Run Server Manually + UI](#2-run-server-manually--ui-)
   - [Open Pages Manually (No Popup)](#3-open-pages-manually-no-popup-)
@@ -187,6 +187,7 @@ pip install nicegui
 ---
 
 ## How To Run ▶️
+So where do we start?
 
 ### 1) Run via Launcher (Recommended) 🚀
 This is the default and recommended execution method.
@@ -199,7 +200,7 @@ python BotChat/Run_App.py
   - The Launcher opens automatically in a Chrome “app window” (popup-like UI).
   - You can start/stop the TCP server and spawn chat windows from the Launcher.
 
-### 2) Run Server Manually + UI 🧠
+### 2) Run Server Manually + UI 🕹️
 If you prefer to start the server manually:
 
 **Step A — Start the TCP server**
@@ -231,3 +232,32 @@ http://localhost:<CHAT_UI_PORT>/?mode=chat&nickname=NAME
 ```py
 http://localhost:8080/?mode=chat&nickname=User1234
 ```
+
+---
+
+## How to Use the Launcher 🚀
+
+### Create a User 👤
+
+- Enter a nickname (1–9 characters)
+
+- Press Enter or click LAUNCH CHAT
+
+- A new chat window opens as a popup
+
+### Server Toggle (ON/OFF) ☁️
+
+- The Launcher can start the server as a subprocess
+
+- It also detects real server status by attempting a fast TCP connection to `SERVER_IP:SERVER_PORT`
+
+### Show Active Users 👨‍💻
+
+- Opens a dialog that refreshes live
+
+- Users are synced through a dedicated observer TCP connection (launcher acts as a hidden client)
+
+
+
+
+
