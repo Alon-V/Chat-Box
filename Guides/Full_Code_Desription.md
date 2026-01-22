@@ -119,28 +119,12 @@ BotChat consists of three layers:
     - `avatar_urls`: synced avatar URL map
     - `avatar_seeds`: stable avatar identity across renames
     - `user_colors_cache`: stable bg color per avatar seed
-
----
-
-## Project Structure 📁
-Core files (based on your code):
-- `Run_App.py` – starts NiceGUI server and opens the Launcher in Chrome app-mode
-- `UI_Router.py` – routes `/` to Launcher and `mode=chat` to Chat
-- `Launcher_UI.py` – server toggle, create users, active users dialog, shutdown logic
-- `Chat_UI.py` – chat messages, sending, DM, rename, avatar sync, scrolling behavior
-- `Main_Server.py` – TCP server (protocol handling, broadcast, private messages)
-- `Common_Setups.py` – configuration (SERVER_IP, ports, Chrome path)
-- `State_Globals.py` – UI state (messages, active users, avatars)
-
+    
 ---
 
 ## Requirements ✅
 - Python 3.10+ recommended
-- Packages:
-  - `nicegui`
-  - `fastapi` (used by NiceGUI routing)
-
-> If you have a `requirements.txt`, install from it. Otherwise, use the commands below.
+- Packages: `nicegui`
 
 ---
 
@@ -153,3 +137,32 @@ All configuration is located in:
 SERVER_IP = '10.0.0.16'
 SERVER_PORT = 8081
 CHAT_UI_PORT = 8080
+```
+
+### Deployment Modes (Evaluator Choice) 🧪
+The evaluator may choose one of the following deployment modes by adjusting `SERVER_IP`.
+
+#### Mode A — Single Machine (Localhost) 🖥️
+Server and UI run on the same machine.
+
+```py
+SERVER_IP = '127.0.0.1'
+```
+Recommended for:
+  - Local testing
+  - Demonstrations
+  - Single-machine evaluation
+
+#### Mode B — Multi-Machine (LAN) 🌐
+Server runs on one machine, UI runs on another machine in the same local network.
+(If needed-> see the guide for further explanation- [How to Find your IP](/Guides/How_to_find_your_IPv4_Address.md)
+
+```py
+SERVER_IP = '<SERVER_MACHINE_LAN_IP>'
+# Example:
+SERVER_IP = '10.0.0.16'
+```
+Notes:
+  - This demonstrates a real client–server architecture.
+  - NiceGUI still runs locally on the UI machine at: http://localhost:<CHAT_UI_PORT>/
+
