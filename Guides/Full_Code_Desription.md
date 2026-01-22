@@ -148,13 +148,14 @@ Server and UI run on the same machine.
 ```py
 SERVER_IP = '127.0.0.1'
 ```
-Recommended for:
+**Recommended for:**
   - Local testing
   - Demonstrations
   - Single-machine evaluation
 
 #### Mode B — Multi-Machine (LAN) 🌐
 Server runs on one machine, UI runs on another machine in the same local network.
+
 (If needed-> see the guide for further explanation- [How to Find your IP](/Guides/How_to_find_your_IPv4_Address.md)
 
 ```py
@@ -162,7 +163,71 @@ SERVER_IP = '<SERVER_MACHINE_LAN_IP>'
 # Example:
 SERVER_IP = '10.0.0.16'
 ```
-Notes:
+**Notes:**
   - This demonstrates a real client–server architecture.
-  - NiceGUI still runs locally on the UI machine at: http://localhost:<CHAT_UI_PORT>/
+  - NiceGUI still runs locally on the UI machine at: `http://localhost:<CHAT_UI_PORT>/`
 
+---
+
+## Installation 📦
+
+### 1) Clone the Repository
+```py
+git clone <repository-url>
+cd BotChat
+```
+
+### 2) Install Dependencies
+```py
+pip install nicegui 
+```
+
+*(Optional) Use a virtual environment if required by your system.
+
+---
+
+## How To Run ▶️
+
+### 1) Run via Launcher (Recommended) 🚀
+This is the default and recommended execution method.
+```py
+python BotChat/Run_App.py
+```
+
+**What happens:**
+  - NiceGUI server starts on: `http://localhost:<CHAT_UI_PORT>/`
+  - The Launcher opens automatically in a Chrome “app window” (popup-like UI).
+  - You can start/stop the TCP server and spawn chat windows from the Launcher.
+
+### 2) Run Server Manually + UI 🧠
+If you prefer to start the server manually:
+
+**Step A — Start the TCP server**
+```py
+python BotChat/Main_Server.py
+```
+
+**Step B — Start the NiceGUI UI**
+```py
+python BotChat/Run_App.py
+```
+
+*In this mode you can keep the Launcher toggle OFF and just use it to spawn users.
+
+### 3) Open Pages Manually (No Popup) 🌍
+If Chrome app-mode popup is blocked, you can open the pages manually.
+
+**Launcher:**
+```py
+http://localhost:<CHAT_UI_PORT>/
+```
+
+**Chat:**
+```py
+http://localhost:<CHAT_UI_PORT>/?mode=chat&nickname=NAME
+```
+
+**For Example:**
+```py
+http://localhost:8080/?mode=chat&nickname=User1234
+```
