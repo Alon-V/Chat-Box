@@ -189,7 +189,7 @@ pip install nicegui
 ## How To Run ▶️
 So where do we start?
 
-### 1) Run via Launcher (Recommended) 🚀
+### 1) Run via Launcher (Recommended) 🛸
 This is the default and recommended execution method.
 ```py
 python BotChat/Run_App.py
@@ -241,9 +241,10 @@ http://localhost:8080/?mode=chat&nickname=User1234
 
 - Enter a nickname (1–9 characters)
 
-- Press Enter or click LAUNCH CHAT
+- Press Enter or click "LAUNCH CHAT"
 
 - A new chat window opens as a popup
+  
 
 ### Server Toggle (ON/OFF) ☁️
 
@@ -251,12 +252,95 @@ http://localhost:8080/?mode=chat&nickname=User1234
 
 - It also detects real server status by attempting a fast TCP connection to `SERVER_IP:SERVER_PORT`
 
+- When switches of shutsdown the server
+  
+
 ### Show Active Users 👨‍💻
 
-- Opens a dialog that refreshes live
+- Opens a dialog that refreshes live containing all the connected users 
 
 - Users are synced through a dedicated observer TCP connection (launcher acts as a hidden client)
+  
 
+### Close All Chats ❌
+
+- Uses a BroadcastChannel('chat_control_v1')
+
+- Each chat window listens and performs a clean shutdown sequence
+  
+
+### Shutdown System 😵
+
+A full shutdown performs:
+
+  - Close all chat windows
+
+  - Stop the server shortly after
+
+  - Close the launcher
+
+  - Terminate the launcher process (optional)
+
+---
+
+## How to Use the Chat Window 💬
+
+### Send Messages ⏩
+
+- Type a message and press Enter (or click send)
+
+- Select target:
+
+  - Everyone → ALL
+
+  - A specific username → direct message
+
+**Validation rules:**
+
+  1) Empty messages are blocked
+
+  2) Sending to yourself is blocked
+     
+
+### Rename Yourself 🫆
+
+- Edit from the “My Name” field (1–9 chars) and press Enter
+
+- Client performs local validation (reserved names, duplicates)
+
+- Server validates again and responds with:
+
+  - `ACK|System|<old>|NAME_CHANGED|<new>` (requestor)
+
+  - `RENAME|<old>|<new>` (broadcast)
+
+  - `MSG|System|ALL|...|...` (informative system message)
+
+**Rollback timer:** *If you typed a name but did not confirm (Enter), the input field reverts after ~8 seconds.
+
+
+### Change Avatar 📸
+
+- Click the avatar (top-left) to open the avatar picker dialog
+
+- Choose an avatar and optionally lock a background color
+
+- Client sends: `CMD:AVATAR:<url>`
+
+- Server broadcasts: `AVATAR|<username>|<url>`
+
+- All clients update the avatar in real-time
+
+
+### Scroll-Aware Unread Counter 👇
+
+When the user scrolls up:
+
+- New messages increment a counter badge
+
+- A floating “scroll to bottom” button appears
+  
+- When the user returns to bottom: Counter resets automatically
 
 
 
