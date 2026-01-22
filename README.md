@@ -73,7 +73,7 @@ There are 2 ways to open the server:
 1) Run the `Main_Server` file and then start the app from the `Run_App` file.
 2) In the app luncher (that opens after running the run_app file), there is a toggle with an indicator in the upper left corner, switch it on, and thats it.
     - *This button might not work if you try to use the chat in a lan network.
-    - In that case use method number (1).
+      *In that case use method number (1).
 
 ### Adding a user
 
