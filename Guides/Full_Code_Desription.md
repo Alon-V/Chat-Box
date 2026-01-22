@@ -151,7 +151,7 @@ CHAT_UI_PORT = 8080
 ### Deployment Modes (Evaluator Choice) 🧪
 The evaluator may choose one of the following deployment modes by adjusting `SERVER_IP`.
 
-#### Mode A — Single Machine (Localhost) 🖥️
+#### Mode A — Single Machine (Localhost) 🖥️ --->
 Server and UI run on the same machine.
 
 ```py
@@ -162,7 +162,7 @@ SERVER_IP = '127.0.0.1'
   - Demonstrations
   - Single-machine evaluation
 
-#### Mode B — Multi-Machine (LAN) 🌐
+#### Mode B — Multi-Machine (LAN) 🌐 --->
 Server runs on one machine, UI runs on another machine in the same local network.
 
 (If needed-> see the guide for further explanation- [How to Find your IP](/Guides/How_to_find_your_IPv4_Address.md))
