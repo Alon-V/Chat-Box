@@ -1,7 +1,7 @@
 # About Botchat 🤖
 
-A real time chat application built with Python, Raw TCP Sockets, and NiceGUI.
-Botchat is a full Client Server architecture using pure Python socket libraries for networking wrapped in a responsive web-based interface.
+A real-time chat application built with Python, Raw TCP Sockets, and NiceGUI.
+Botchat is a full Client-Server architecture using pure Python socket libraries for networking wrapped in a responsive web-based interface.
 
 --> [In case you want to first look at part 1- "TCP/IP Packet Encapsulation and Capture" click here](/PartOne/WireSharkLog.md)
 
@@ -11,16 +11,16 @@ Botchat is a full Client Server architecture using pure Python socket libraries 
 ---
 
 ## Key Features ✨
-- **Pure TCP Networking:** Built entirely on Python's standard socket library (no high level wrappers like Socket.IO). (Saddly this was asked for in the project reqirments)
+- **Pure TCP Networking:** Built entirely on Python's standard socket library (no high-level wrappers like Socket.IO). (Sadly this was asked for in the project requirements 😉)
 - **Real-Time Communication:** Instant messaging with support for Global Chat and Private Messaging.
 - **Multi-User Support:** Handles multiple concurrent connections.
-- **Dynamic UI:** Modern interface (NiceGUI was very time saving and helpfull) with auto-scrolling, message bubbles, and notifications.
-- **Launcher:** Fuctions as a control center and an observer.
+- **Dynamic UI:** Modern interface (NiceGUI was very time-saving and helpful) with auto-scrolling, message bubbles, and notifications.
+- **Launcher:** Functions as a control center and an observer.
 
 ---
 
 ## Project Structure 🧌
-| File | Short summery |
+| File | Short summary |
 | --- | --- |
 | [Main_Server](/PartTwo/BotChat/Main_Server.py) | The TCP Server logic (Connection handling, Broadcasting) |
 | [Chat_UI](/PartTwo/BotChat/Chat_UI.py) | The Chat Window interface (NiceGUI + Client Socket) |
@@ -42,7 +42,7 @@ First of all, you need:
 
 ### Easy (and "special") way to run it:
 
-Copy all the code in the project one by one to a open project you have make sure each code is in a diffrent file in that project
+Copy all the code in the project one by one into an open project you have. Make sure each file from this repo is copied into a separate file in that project.
 
 ### The normal way:
 1. Clone the repository: 
@@ -66,18 +66,18 @@ python Run_App.py
 
 ---
 
-## How to Use the app 👨‍💻
+## How to Use the App 👨‍💻
 
 ### Running the chat and server
-There are 2 ways to open the server:
+There are 2 ways to start the server:
 1) Run the `Main_Server` file and then start the app from the `Run_App` file.
-2) In the app luncher (that opens after running the run_app file), there is a toggle with an indicator in the upper left corner, switch it on, and thats it.
-    - *This button might not work if you try to use the chat in a lan network.
+2) In the app launcher (that opens after running the `Run_App` file), there is a toggle with an indicator in the upper left corner, switch it on, and that’s it.
+    - *This button might not work if you try to use the chat on a LAN network.
       In that case use method number (1).
 
 ### Adding a user
 
-This luncher is what you should see after running `Run_App`:
+This launcher is what you should see after running `Run_App`:
 <div align="center">
   <img width="300" height="400" alt="image" src="https://github.com/user-attachments/assets/838ae443-56ed-4c18-802f-b3d895017376" />
 </div>
