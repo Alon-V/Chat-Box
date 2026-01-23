@@ -25,13 +25,17 @@ This includes:
 `SYN` : A reqst to connect
 
   ⤵️
+  
 `ACK` : An ackolgemnet (a yes/no answer to the reqst) and if its accpteed then the coneection happans otherwise nothing happens
 an easy way to find him is to look at the Length, it wont be longer then 25 bytes becose the massgae its sends is: __LAUNCHER__
 
 3. A "New User"
 This includes:
+
 `SYN` : A reqst to connect
+
   ⤵️
+  
 `ACK` : An ackolgemnet (a yes/no answer to the reqst) and if its accpteed then the coneection happans otherwise nothing happens
 The massage in this one is the name of the user
 
