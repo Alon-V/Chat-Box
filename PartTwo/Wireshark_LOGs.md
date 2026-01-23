@@ -5,9 +5,13 @@
 
 This includes:
 `SYN` : A reqst to connect
+
   ⤵️
+  
 `ACK` : An ackolgemnet (a yes/no answer to the reqst) and if its accpteed then the coneection happans otherwise nothing happens
+
   ⤵️
+  
 `FIN` : end connection
 <div align="center">
 <img width="1215" height="96" alt="image" src="https://github.com/user-attachments/assets/d0db2a95-8838-496c-b7ba-3f81365dc77a" />
