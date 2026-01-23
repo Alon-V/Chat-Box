@@ -142,3 +142,22 @@ This launcher is what you should see after running `Run_App`:
 4. Ensure that inbound traffic on `SERVER_PORT` is allowed by the Windows system Firewall.
    (Temporarily disabling the firewall may help during testing, but is not recommended for production environments.)
 
+---
+
+## Use of AI Tools (Disclosure) 📠
+
+This project made limited use of AI-based tools as a productivity aid during development and documentation.
+
+### Purpose of Use
+AI tools were used for:
+- Improving code readability and structure (exp. notes, structure)
+- Refining documentation wording and technical explanations (exp. readme's)
+- Verifying design decisions and edge cases during development (exp. "where can we fall?")
+
+No code was generated from start to finish by AI, and all architectural decisions, implementation, and debugging were performed by us.
+
+### Example Prompts
+Examples of prompts used during development include:
+- *"Review this TCP client–server design and suggest potential edge cases."*
+- *"Help refine this README section to be clearer for an academic evaluator."*
+- *"Explain possible failure scenarios in a socket-based rename handshake."*
