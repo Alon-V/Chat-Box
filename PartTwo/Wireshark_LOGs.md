@@ -4,6 +4,7 @@
 1. Our Launcher frequently connects just to check if the server is online and then immediately disconnects.
 
 This includes:
+
 `SYN` : A reqst to connect
 
   ⤵️
