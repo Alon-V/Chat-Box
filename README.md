@@ -1,8 +1,14 @@
 # About Botchat 🤖
 
+## Part 1: 📦
+A practical implementation of TCP/IP communication by manually constructing, sending, capturing, and analyzing network packets.
+In the goal of an in-depth understanding of the encapsulation process across the TCP/IP layers, while observing and analyzing real network traffic using Wireshark.
+
+## Part 2: 💬
 A real-time chat application built with Python, Raw TCP Sockets, and NiceGUI.
 Botchat is a full Client-Server architecture using pure Python socket libraries for networking wrapped in a responsive web-based interface.
 
+## Shortcats: 🛣️
 --> **In case you want to first look at part 1:** 
 
 - For the Whole `"Part One"` folder [click here](/PartOne)
@@ -15,6 +21,8 @@ Botchat is a full Client-Server architecture using pure Python socket libraries 
 
 --> **In case you want to skip to the LAN setup** [click here](https://github.com/Alon-V/Bot-Chat?tab=readme-ov-file#how-to-run-chatbot-on-local-lan-multiple-computers-)
 
+---
+## * This next section is a short guide for Part Two of the project ->  
 ---
 
 ## Key Features ✨
@@ -128,4 +136,6 @@ This launcher is what you should see after running `Run_App`:
 2. Open [Common_Setups](/BotChat/Common_Setups.py).
 3. Update the SERVER_IP variable:
 `SERVER_IP = '*.*.*.*'  # Replace with YOUR local IP`
-4. Ensure your Windows Firewall allows inbound traffic on the port defined in SERVER_PORT if it does not work just disable the firewall
+4. Ensure that inbound traffic on `SERVER_PORT` is allowed by the Windows system Firewall.
+   (Temporarily disabling the firewall may help during testing, but is not recommended for production environments.)
+
