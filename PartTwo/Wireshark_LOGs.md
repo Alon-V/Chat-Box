@@ -1,73 +1,159 @@
-# Welcome to our network traffic (Wireshark) 🦈 tour
+# Computer Networks Project Report- Part 2 🌐
+## TCP/IP Client-Server Chat Packet Capture
 
-## First of all I will show you the 3 types of Handshakes we have
-### 1. Our Launcher frequently connects just to check if the server is online and then immediately disconnects.
+## Welcome to our network traffic (Wireshark) tour 🦈
+In this section, we examine the Client-Server Chat network traffic captured using Wireshark and explain how different types of TCP connections are used throughout the system.
 
-This includes:
+---
 
-`SYN` : A reqst to connect
+## TCP Handshake Scenarios 🤝
+Below are the three main types of TCP handshakes observed in the application.
+
+---
+
+## 1. Launcher-Observer Connection  [ 🚀 → 👀 ]
+The *"Observer"* is a hidden TCP connection to the server initiated by the Launcher and kept open continuously.
+The Observer connection serves as a persistent monitoring channel, allowing the Launcher to remain synchronized with the server state independently of active chat users.
+
+Its purpose is:
+- **Live User Monitoring:** Receives real-time updates about connected users (joins and disconnects).
+- **Global Control Operations:** Enables system-wide actions such as: "Show Active Users", "Close All Chats" and "Shutdown System".
+- **Architectural Separation:** Maintains a clear distinction: `Data Plane → Chat Messages` -|- `Control Plane → Observer + Launcher`.
+
+### This handshake consists of:
+
+**`[SYN]` :** A connection request.
 
   ⤵️
   
-`ACK` : An ackolgemnet (a yes/no answer to the reqst) and if its accpteed then the coneection happans otherwise nothing happens
+**`[ACK]` :** A server acknowledgment (a yes/no answer to the request).
+
+Once established, the connection remains open (otherwise nothing happens).
+
+An easy way to identify this connection in Wireshark is by inspecting the packet length:  
+it does not exceed **25 bytes**, since the message sent during the handshake is the identifier: __LAUNCHER__.
+
+---
+
+## 2. Launcher Server Availability Check [ 🚀 → 📡 ]
+The Launcher periodically establishes a short-lived TCP connection to verify whether the server is online.  
+Once the status is confirmed, the connection is immediately closed.
+
+Its purpose is:
+- **Health Check:** Performs a real TCP-level availability check, independent of UI state or local process assumptions.
+- **External Verification:** Detects servers started manually or running on other machines within the LAN.
+- **UI Synchronization:** Aligns UI state (online/offline indicators, controls) with the actual server status.
+- **Fault Awareness:** Identifies crashes or unexpected server termination.
+- **Lightweight Design:** Short-lived connection; not part of the messaging protocol and minimal resource usage.
+
+
+### This handshake consists of:
+
+**`[SYN]` :** A connection request.
 
   ⤵️
   
-`FIN` : end connection
+**`[ACK]` :** A server acknowledgment (a yes/no answer to the request). 
+
+Indicating whether the connection request was accepted (otherwise nothing happens).
+
+  ⤵️
+  
+**`[FIN]` :** Connection termination.
+
+<br>
+
 <div align="center">
-<img width="1215" height="96" alt="image" src="https://github.com/user-attachments/assets/d0db2a95-8838-496c-b7ba-3f81365dc77a" />
+<img width="1215" height="496" alt="image" src="https://github.com/user-attachments/assets/d0db2a95-8838-496c-b7ba-3f81365dc77a" />
   </div>
 
-### 2. The "Observer" is a hidden connection to the Launcher that is keepet open to update the user list.
+---
 
-This includes:
+## 3. A "New User" Connection [ 🆕 👤 ]
+When a new user joins the chat, a dedicated TCP connection is established between the client and the server using a standard **three-way handshake**, as introduced and discussed in the course.
 
-`SYN` : A reqst to connect
+### This handshake consists of:
 
-  ⤵️
-  
-`ACK` : An ackolgemnet (a yes/no answer to the reqst) and if its accpteed then the coneection happans otherwise nothing happens
-an easy way to find him is to look at the Length, it wont be longer then 25 bytes becose the massgae its sends is: __LAUNCHER__
-
-### 3. A "New User"
-This includes:
-
-`SYN` : A reqst to connect
+**`[SYN]` :**  
+A connection request sent by the client to initiate the session.
 
   ⤵️
-  
-`ACK` : An ackolgemnet (a yes/no answer to the reqst) and if its accpteed then the coneection happans otherwise nothing happens
-The massage in this one is the name of the user
 
-Here you can see the Handshak made to create a new user and the massage sent that include the user name of the new user
+**`[SYN, ACK]` :**  
+The server acknowledges the request and agrees to establish the connection (otherwise nothing happens).
+
+  ⤵️
+
+**`[ACK]` :**  
+The client confirms the acknowledgment, completing the connection setup.
+
+<br>
+
+*Immediately after the handshake is completed, the client sends its **username** as the first application-level payload.* --> **`[PSH, ACK]`** 
+
+<br>
+
+Below is the handshake sequence used to create a new user, followed by the packet containing the username ("Vin"):
+
 <div align="center">
-<img width="1347" height="68" alt="image" src="https://github.com/user-attachments/assets/d880ce11-c009-4b6f-b4be-73d914a188ed" />
+<img width="1347" height="968" alt="image" src="https://github.com/user-attachments/assets/d18695de-c055-4293-864e-80e3e99c80cd" />
   </div>
+
+<br>
+
 <div align="center">
 <img width="1107" height="668" alt="image" src="https://github.com/user-attachments/assets/8def7304-51b1-4f84-817e-87307202e186" />
   </div>
-the difrennce in source and destination IP shows that the user was crated not in the same pc that the server is running on
-you also get the randomized port that the user is got, when sent a reqest to the server thats running on port 8081
 
-## Sending a massage
-When sending a massage it will look like this
+<br>
+
+The difference between the source and destination IP addresses indicates that the user was created on a different machine than the one hosting the server.
+
+Additionally, the capture shows the randomized port assigned to the client when sending a request to the server(**59772**), which listens on port **8081**.
+
+---
+
+## Sending a massage 📟
+When a user sends a message, the traffic appears as follows:
+
 <div align="center">
 <img width="1049" height="17" alt="image" src="https://github.com/user-attachments/assets/e0005833-ace6-4880-9397-f55beced01ae" />
   </div>
-You can see the the source ip of massage in this case `10.0.0.15` and the desttnion (its always the server location) in this case `10.0.0.16`.
-and the port of the user and server.
 
-and this is the massage that was send
+<br>
+
+In this example:
+- Source IP: `10.0.0.15` (client)
+- Destination IP: `10.0.0.16` (server) {*It is always the server's location}
+- The packet includes both the client’s ephemeral port (**59772**) and the server’s listening port (**8081**)
+
+<br>
+
+The message payload itself can be observed here ("I am a mistborn"):
+
 <div align="center">
-<img width="907" height="427" alt="image" src="https://github.com/user-attachments/assets/6420c41c-6564-4fee-be6c-cae4b625bf73" />
+<img width="907" height="427" alt="image" src="https://github.com/user-attachments/assets/ce3a154c-d6c6-4ab1-94ad-2bc8d4ecc186" />
 </div>
 
-## Reciving a massage
-Becose the massage is a broadcast so the server sents this massage to all useres that are coneccted (you can see that the ports are diffrent)
+---
+
+## Reciving a massage 📬
+Since this message is a **broadcast**, the server forwards it to all connected users.  
+This is visible in Wireshark by observing multiple outgoing packets from the server, each with a different destination port.
+
+<br>
+
 <div align="center">
 <img width="1072" height="49" alt="image" src="https://github.com/user-attachments/assets/c7e77c29-5ee5-4e25-8e6b-2d70261104ae" />
 </div>
-In case its a praivet massage then he sends this onnly to one user
+
+<br>
+
+<div align="center">
+<img width="552" height="116" alt="Screenshot 2026-01-24 at 12 32 38" src="https://github.com/user-attachments/assets/b9056119-5d76-4639-b851-346569696a8c" />
+</div>
+
+**In case its a praivet massage then he sends this only to one user.*
 
 
 
