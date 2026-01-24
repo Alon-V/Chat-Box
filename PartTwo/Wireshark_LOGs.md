@@ -32,11 +32,18 @@ Its purpose is:
 
 ### This handshake consists of:
 
-**`[SYN]` :** A connection request.
+**`[SYN]` :**  
+A connection request sent by the client to initiate the session.
 
   ⤵️
-  
-**`[ACK]` :** A server acknowledgment (a yes/no answer to the request).
+
+**`[SYN, ACK]` :**  
+The server acknowledges the request and agrees to establish the connection (otherwise nothing happens).
+
+  ⤵️
+
+**`[ACK]` :**  
+The client confirms the acknowledgment, completing the connection setup.
 
 Once established, the connection remains open (otherwise nothing happens).
 
