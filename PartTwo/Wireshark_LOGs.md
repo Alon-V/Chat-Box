@@ -48,7 +48,7 @@ The client confirms the acknowledgment, completing the connection setup.
 Once established, the connection remains open (otherwise nothing happens).
 
 An easy way to identify this connection in Wireshark is by inspecting the packet length:  
-it does not exceed **25 bytes**, since the message sent during the handshake is the identifier: __LAUNCHER__.
+it does not exceed **25 bytes**, since the message sent during the handshake is the identifier: **`__LAUNCHER__`**.
 <div align="center">
 <img width="1319" height="65" alt="image" src="https://github.com/user-attachments/assets/1c7d5d3e-06bc-4b8b-986c-fe3787e798cd" />
   </div>
