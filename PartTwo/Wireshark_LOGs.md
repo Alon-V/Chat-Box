@@ -6,6 +6,16 @@ In this section, we examine the Client-Server Chat network traffic captured usin
 
 ---
 
+## Table of Contents 📌
+- [TCP Handshake Scenarios](#tcp-handshake-scenarios-)
+  - [Launcher-Observer Connection](#1-launcher-observer-connection------)
+  - [Launcher Server Availability Check](#2-launcher-server-availability-check-----)
+  - [A "New User" Connection](#3-a-new-user-connection----)
+- [Sending a Message](#sending-a-massage-)
+- [Receiving a Message](#reciving-a-massage-)
+
+---
+
 ## TCP Handshake Scenarios 🤝
 Below are the three main types of TCP handshakes observed in the application.
 
