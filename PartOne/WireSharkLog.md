@@ -9,6 +9,35 @@ The project focuses on the HTTP protocol running over TCP and simulates real tra
 
 ---
 
+## Table of Contents 📌
+
+- [Project Goals](#project-goals-)
+- [Technologies and Tools](#technologies-and-tools-%EF%B8%8F)
+- [Stage 1: CSV File Preparation and Data Source](#stage-1-csv-file-preparation-and-data-source-%EF%B8%8F)
+  - [Dataset (CSV Input)](#dataset-csv-input-)
+  - [Data Preparation](#data-preparation-)
+  - [Main Fields](#main-fields-)
+- [Stage 2: Packet Encapsulation Process](#stage-2-packet-encapsulation-process-)
+  - [Key Components](#key-components-)
+  - [Final Packet Assembly Using the RawTcpTransport Class](#final-packet-assembly-using-the-rawtcptransport-class-%EF%B8%8F)
+    - [Initialization](#initialization-__init__)
+    - [Packet Encapsulation](#packet-encapsulation-encapsulate)
+    - [Packet Transmission](#packet-transmission-send)
+  - [Encapsulation Flow](#encapsulation-flow----)
+  - [Interface Detection and Preview Demonstration](#interface-detection-and-preview-demonstration-)
+- [Operating System Limitations and Solution](#operating-system-limitations-and-solution-%EF%B8%8F)
+- [Stage 3: Packet Transmission and Capture](#stage-3-packet-transmission-and-capture-)
+  - [Sending Logic](#sending-logic-)
+  - [Capturing Logic](#capturing-logic-)
+- [Stage 4: Analysis of Captured Traffic](#stage-4-analysis-of-captured-traffic-)
+  - [Packet Overview](#packet-overview-)
+  - [CSV-Based Packet Re-Transmission](#csv-based-packet-re-transmission-)
+- [Scapy Warning During Packet Transmission](#scapy-warning-during-packet-transmission-%EF%B8%8F)
+- [Results](#results-)
+- [Conclusion](#conclusion-)
+
+---
+
 ## Project Goals 🎯
 - Demonstrate the TCP/IP encapsulation process in practice  
 - Manually construct a CSV file containing application-layer messages.
@@ -31,7 +60,7 @@ The project focuses on the HTTP protocol running over TCP and simulates real tra
 ## Stage 1: CSV File Preparation and Data Source 🗃️
 
 ## Dataset (CSV Input) 📊
-The input data is based on real HTTP traffic captured on the loopback interface.
+The CSV input data is based on real HTTP traffic on our computers for a certain period of time captured on the loopback interface on wireshark.
 
 ### Data Preparation 📑
 1. Network traffic was captured using Wireshark on the loopback interface.
